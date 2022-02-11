@@ -1,0 +1,73 @@
+***Cloudflare Commands
+
+Zone Id-> 0d32a989ca0e8d5e9155163f9f937d2b
+
+API Token-> for purge (IYdAbiv4tnkEG6duMowsupXHGBajX5oIcl40FFv-)
+            for Global (4ef065aa7da010a6eca9e97fb8d3123d1efbf)
+
+Account ID-> 63aa4349b5d9134c55d699ef7db2a636
+
+	
+#Enabling log retention
+
+---------------------------------------------------------------------------------------------------------
+***********Turn on log retention:
+
+original* - curl -s -H "X-Auth-Email: <REDACTED>" -H "X-Auth-Key: <REDACTED>" POST "https://api.cloudflare.com/client/v4/zones/<ZONE_ID>/logs/control/retention/flag" -d'{"flag":true}' | jq .
+
+
+
+***********Check whether log retention is turned on:
+
+
+Original* - curl -s -H "X-Auth-Email: <REDACTED>" -H "X-Auth-Key: <REDACTED>" GET "https://api.cloudflare.com/client/v4/zones/<ZONE_ID>/logs/control/retention/flag" | jq .
+
+
+
+{
+  "errors": [],
+  "messages": [],
+  "result": {
+    "flag": true
+  },
+  "success": true
+}
+
+== This o/p means log rotation is turned on and CF has started to save the logs from that point.	
+----------------------------------------------------------------------------------------------------------
+*** COMPARE WITH CURL
+
+This is used to find out wichich part has the problem.
+
+Use cURL resolve override to compare the behaviour between response-coming-via-Cloudflare vs response-directly-from-origin.
+
+curl -svo /dev/null/ "http://www.greencoin.cf"
+
+curl -svo /dev/null/ "http://www.greencoin.cf" --resolve www.greencoin.cf:80:35.234.81.115
+-----------------------------------------------------------------------------------------------
+Exercise : ACE3 : 53:30 Retrieve Logs with RayID
+
+https://api.cloudflare.com/client/v4/zones/<zone_id>/logs/rayids/<ray_id>?[&fields=<string>][&timestamps=<strings>]
+
+
+
+
+Readymade Query
+
+curl -X GET "https://api.cloudflare.com/client/v4/zones/<zoneID>/logs/rayids/6b6bbeb51ff60e24?&fields=$(curl -s -H "X-Auth-Email: uday.gidge@blazeclan.com" -H "X-Auth-Key: <>" "https://api.cloudflare.com/client/v4/zones/<zoneID>/logs/received/fields" | jq '. | to_entries[] | .key' -r | paste -sd "," -)&timestamps=RFC3339" \
+     -H "X-Auth-Email: <Email>" \
+     -H "X-Auth-Key: <>" \
+     -H "Content-Type: application/json" | jq
+	 
+	 
+----------------------------------------------------------------------------------------------
+Retrieve logs for Specific time frame
+
+https://api.cloudflare.com/client/v4/zones/<zoneID>/logs/rayids/<6b6bbeb51ff60e24>?[&fields=<string>][&timestamps=<strings>]
+
+
+-----------------------------------------------------------------------------------------------
+# Run the API call to purge all the cache from Cloudflare edge
+using the above API token
+
+IYdAbiv4tnkEG6duMowsupXHGBajX5oIcl40FFv-

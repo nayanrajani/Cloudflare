@@ -1,0 +1,15 @@
+Cloudflare Access->
+
+In the matter of Zero Trust, you can easily think of your personal things that you own where you have stored 
+them like your own cash, or things that you don't want to share with anyone, those things are stored in your 
+almirah, and the key to acces the almirah belongs to you only. Zero trust is like that, or as an simple 
+example- when you access to your internet banking only the credentials are not required but sometime an 
+otp to access is required it means "No trust, verify all".
+
+
+Cloudflare Gateway->
+
+Cloudflare gateway is a process where your company employees has some limited acces to the internet that you 
+want to setup at the employee end, we can setup via using cloudflare gateway. as an example we can setup 
+cloudflare gateway at your employees end to not be able to access the social media content or to block from 
+certain domain to acces via laptop/internet.

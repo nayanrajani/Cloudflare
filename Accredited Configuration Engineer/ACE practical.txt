@@ -1,0 +1,20 @@
+1. freenom to register a domain
+type domain name and check for availability, then go for checkout with 12 months free, 
+
+Enter Email address(Working Email) and verify it
+
+2. go to fake address generator and generate a fake one, and add it there at checkout
+copy the phone number remove -
+
+3. enter password and click on update
+
+4. go to freenom and login with the credentials email and password 
+
+5. services then my domains
+
+then login to Cloudflare dashboard
+
+1. add your domain to add site,
+
+2. choose enterprice plan, 
+

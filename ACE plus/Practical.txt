@@ -1,0 +1,76 @@
+Points to be note:
+1. need 75% to pass
+2. create doc, pdf, label with format name and organization
+3. explaining answers 
+
+let's begin:
+
+1. Account Creation (5 points)
+
+	- We have to create 2 server on AWS/google/digital ocean.
+
+	- endpoint returns all HTTP request headers in the body of http response.
+
+	- endpoint that you hhave written yourself(html, php, jsp, aspx, etc)
+
+	- include image and video file as part of your website
+	
+	- Storage for image and video files
+
+2. DNS & SSL/TLS configuration (5 points)
+
+	- two application need for web.<domain.com> and app.<domain.com>
+
+	A. we have to deploy ECDSA certificate(create ECC certificate) between CF and origin using SSl full(strict)
+
+	B. Deploy a ECDSA origin cert on the origin and secure the communication between Cloudflare and the origin using SSL Full (Strict) mode
+
+	C. Bonus (1 point): deploy a custom vanity NS server on your zone
+
+3. Firewall (15 points)
+
+	- Enable both the Cloudflare Managed Rulesets and the OWASP ruleset
+
+	A. OWASP threshold to low, with PL4 Paranoia level (need to search)
+
+	B. Create a Firewall Rule to block request to app.<domain.com>/admin from any IP in Singapore, unless that request contains a cookie: "cf_bypass=true"
+	Changes required- (http.request.uri.path contains "app.blackclover.gq/admin/*" and ip.geoip.country eq "SG") or (http.cookie contains "cf_bypass=true")
+
+	C.Create a Firewall Rule to allow requests going to the app.<domain.com>/admin to bypass WAF Managed Rulesets and Rate Limiting
+	(http.request.uri.path contains "app.blackclover.gq/admin/*")
+
+4. Performance (30 points)
+
+	A.  Again check
+
+	B. URL, then settings for Browser cache TTL for 4 hours, Edge Cache TTL for an Hour, Save 
+
+	C. Speed -> optimization -> polish, and we need to run command [need command]
+
+	D. Custom Purge and purge by prefix (app.<domain.com>/static) -> Purge
+
+	E. [Hold]
+
+5. User Administration & Log Analytics (5 points)
+
+	User Administration:
+
+		A. Account Home -> Audit logs(Only screenshot)
+
+		B. Custom pages -> all the options for custom pages(Only screenshot)
+
+	Logs and Analytics
+
+		C. Analytics and then logs, -> logpush-> connect a service(Only screenshot)
+
+		D. we need API token and Zone ID, API Call for Log Pull through Command [curl -X POST "https://api.cloudflare.com/client/v4/zones//logs/control/retention/flag" -d'{"flag":true}' \-H "X-Auth-Email: <YOUR_EMAIL>" \-H "X-Auth-Key: <API_KEY>" | jq .]
+
+		E.  Postman or curl to run API call to download your log for the previous 1 hour using Logpull [curl -s \-H "X-Auth-Email: <YOUR_EMAIL>" \-H "X-Auth-Key: <API_KEY>" \"https://api.cloudflare.com/client/v4/zones//logs/received?start=&end=&fields=$(curl -s -H "X-Auth-Email: <YOUR_EMAIL>" -H "X-Auth-Key: <API_KEY>" "https://api.cloudflare.com/client/v4/zones/<ZONE_ID>/logs/received/fields" | jq '. | to_entries[] | .key' -r | paste -sd "," -)&timestamps=RFC3339" > logpull.json]
+
+6. Client API (15 points)
+
+	A. Command-> https://api.cloudflare.com/client/v4/zones/{{zone_id}}/settings(Only screenshot for Json response)
+
+	B. [Hold]My profile -> API tokens -> create token -> create custom Token -> details{}
+
+	C. [hold]

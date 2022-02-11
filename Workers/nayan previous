@@ -1,0 +1,88 @@
+
+function parseCookies(headers) {
+    console.log('this is hearders-->');
+    console.log(JSON.stringify(headers));
+//   console.log('this is hearders-->');
+//   console.log(JSON.stringify(headers.get('cookie')));
+    const parsedCookie = {};
+    
+            if (headers) {
+                const parts = headers.split('=');
+                parsedCookie[parts[0].trim()] = parts[1].trim();
+            }
+        
+
+    console.log('parcedcookie--->>');
+    console.log(parsedCookie)
+    return parsedCookie;
+}
+async function handleRequest(request) {
+  try {
+        const originalResponse = await fetch(request);
+        console.log('original-->>');
+        console.log(JSON.stringify(request));
+        console.log(JSON.stringify(originalResponse))
+        //const response = new Response(originalResponse.body, originalResponse)
+        
+        const response = new Response(originalResponse)
+        const reqHeaders = request.headers || {};
+        console.log('reqHearders-->>');
+        console.log(JSON.stringify(reqHeaders));
+        const headingcookie = reqHeaders.get('cookie')
+        console.log('headingcookie->>');
+        console.log(JSON.stringify(headingcookie));
+        const parsedCookies = parseCookies(headingcookie);
+        const reqCookieKeys = Object.keys(parsedCookies);
+
+        console.log('parsedCookies -->')
+        console.log(JSON.stringify(parsedCookies))
+        let date = new Date();
+        date.setTime(+ date + (365 * 86400000));
+
+        let finalCookieArray = [];
+        if (response['headers'] && response['headers']['set-cookie']) {
+            for (var cookie of response['headers']['set-cookie']) {
+                finalCookieArray.push(cookie.value);
+            }
+        }
+
+        if (parsedCookies['bcookie']) {
+            finalCookieArray.push(`bcookie=${parsedCookies['bcookie']}; Max-Age=31536000; Path=/; Expires=${date.toUTCString()}`);
+        }
+
+        for (var i = 0; i < reqCookieKeys.length; i++) {
+            if (reqCookieKeys[i] && reqCookieKeys[i].indexOf('EXP_') === 0 && parsedCookies[reqCookieKeys[i]]) {
+                finalCookieArray.push(`${reqCookieKeys[i]}=${parsedCookies[reqCookieKeys[i]]}; Max-Age=31536000; Path=/; Expires=${date.toUTCString()}`);
+            }
+        }
+
+        console.log('finalCookieArray -->')
+        console.log(finalCookieArray)
+        if (finalCookieArray.length > 0) {
+            /* response['headers']['set-cookie'] = [{
+                'key': 'Set-Cookie',
+                'value': finalCookieArray
+            }]; */
+            //response.headers.append("Set-Cookie", finalCookieArray);
+            response.headers.set("Set-Cookie", finalCookieArray);
+        }
+
+        console.log('Final Response headers -->')
+        console.log(JSON.stringify(response['headers']))
+        console.log(response)
+        //callback(null, response);
+        return response;
+    } catch (err) {
+        console.log('Error');
+        console.log(err)
+        //callback(null, event.Records[0].cf.response);
+        return fetch(request);
+    }
+}
+
+addEventListener("fetch", event => {
+  console.log('Event Request-->>');
+  console.log(JSON.stringify(event.request));
+  console.log(JSON.stringify(event.request));
+  event.respondWith(handleRequest(event.request))
+})

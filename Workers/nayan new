@@ -1,0 +1,354 @@
+const crypto = require('crypto');
+
+const UUIDv4 = new function() {
+function generateNumber(limit) {
+  var value = limit * Math.random();
+  return value | 0;
+}
+
+function generateX() {
+var value = generateNumber(16);
+return value.toString(16);
+}
+
+function generateXes(count) {
+var result = '';
+for(var i = 0; i < count; ++i) {
+result += generateX();
+}
+return result;
+}
+
+function generateVariant() {
+var value = generateNumber(16);
+var variant =  (value & 0x3) | 0x8;
+return variant.toString(16);
+};
+
+    // UUID v4
+    //
+    //   varsion: M=4
+    //   variant: N
+    //   pattern: xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx
+    //
+this.generate = function() {
+     var result = generateXes(8)
+          + '-' + generateXes(4)
+          + '-' + '4' + generateXes(3)
+          + '-' + generateVariant() + generateXes(3)
+          + '-' + generateXes(12)
+     return result;
+};
+};
+
+function isValidSampleRate(sampleRate) {
+  // check if sampleRate is well defined
+  if (
+    sampleRate === undefined
+    || sampleRate.from === undefined
+    || sampleRate.to === undefined
+  ) {
+    return false;
+  }
+
+  // sampleRate "from" and "to" should be valid numbers
+  if (Number.isNaN(sampleRate.from) || Number.isNaN(sampleRate.to)) {
+    return false;
+  }
+
+  // sampleRate "to" should always be greater than "from"
+  if (sampleRate.to <= sampleRate.from) {
+    return false;
+  }
+
+  return true;
+};
+
+function generateExperimentHash (uuid, expID) {
+  let hashObject = crypto.createHash('md5');
+  hashObject.update(uuid + expID)
+  return hashObject.digest('hex');
+}
+
+function getExperimentBucket (experimentHash)  {
+  const eligibilitySubString = experimentHash.substr(0, 8);
+  // 0xffffffff is (2^32)-1 i.e 4294967295 in decimal notation
+  return parseInt(eligibilitySubString, 16) / 0xffffffff;
+};
+
+function getVariantBucket (experimentHash)  {
+  const variantDecidingNum = experimentHash.substr(8, 8);
+  // 0xffffffff is (2^32)-1 i.e 4294967295 in decimal notation
+  return parseInt(variantDecidingNum, 16) / 0xffffffff;
+};
+
+function checkExperimentEligibility (experimentHash, sampleRate) {
+  const experimentBucket = getExperimentBucket(experimentHash);
+  return ((experimentBucket > sampleRate.from) && (experimentBucket <= sampleRate.to));
+}
+
+function getExperimentVariant (experimentHash, variants) {
+  // evaluate the users variant segment using hash
+  const variantBucket = getVariantBucket(experimentHash);
+  let selectedVariant = null;
+
+  for (var i = 0; i < variants.length; i++) {
+    if (
+      (variantBucket > variants[i].sampleRate.from)
+      && (variantBucket <= variants[i].sampleRate.to)
+    ) {
+      selectedVariant = variants[i].name;
+      break;
+    }
+  }
+
+  return selectedVariant;
+}
+
+function getExperimentEligibility (uuid, experimentConfig) {
+  const sampleRate = experimentConfig.sampleRate;
+  const variants = experimentConfig.variants;
+  const experimentLayer = experimentConfig.experimentLayer;
+  const experimentHash = generateExperimentHash(uuid, experimentLayer);
+  const isEligible = checkExperimentEligibility(experimentHash, sampleRate);
+ 
+  console.log('Exp Hash for -->' + experimentConfig.id)
+  console.log(experimentHash);
+ 
+  if(!isEligible) {
+    return {
+      id: experimentConfig.id,
+      experimentLayer: experimentLayer,
+      isEligible : false,
+      hash: experimentHash,
+    };
+  }
+ 
+  const variant = getExperimentVariant(experimentHash, variants);
+ 
+  return {
+      id: experimentConfig.id,
+      experimentLayer: experimentLayer,
+      isEligible : true,
+      hash: experimentHash,
+      variant: variant
+  };
+}
+
+function parseCookies(headers) {
+  const parsedCookie = {};
+  if (headers.cookie && headers.cookie[0] && headers.cookie[0].value) {
+      headers.cookie[0].value.split(';').forEach((cookie) => {
+          if (cookie) {
+              const parts = cookie.split('=');
+              parsedCookie[parts[0].trim()] = parts[1].trim();
+          }
+      });
+  }
+  return parsedCookie;
+}
+
+function stringifyCookies(parsedCookies) {
+  let cookieString = '';
+  if(parsedCookies) {
+    const keys = Object.keys(parsedCookies);
+   
+    if(keys) {
+      for (var i = 0; i < keys.length; i++) {
+        cookieString = cookieString + keys[i] + '=' + parsedCookies[keys[i]] + ';'
+      }
+    }
+  }
+
+  return cookieString;
+}    
+ 
+exports.handler = (event, context, callback) => {
+  try {
+    const experimentConfig = [
+      {
+        "status": true,
+        "sampleRate": {
+          "from": 0,
+          "to": 0.8
+        },
+        "experimentLayer": "HP",
+        "id": "ADP_RV_CFY",
+        "isSSR": true,
+        "variants": [
+          {
+            "name": "A",
+            "sampleRate": {
+              "from": 0,
+              "to": 0.4
+            }
+          },
+          {
+            "name": "B",
+            "sampleRate": {
+              "from": 0.6,
+              "to": 1
+            }
+          }
+        ]
+      },
+      {
+        "status": true,
+        "sampleRate": {
+          "from": 0,
+          "to": 0.7
+        },
+        "experimentLayer": "HP",
+        "nykaaUserVariant": "B",
+        "id": "ADP_RV_MWEB",
+        "isSSR": true,
+        "variants": [
+          {
+            "name": "A",
+            "sampleRate": {
+              "from": 0,
+              "to": 0.4
+            }
+          },
+          {
+            "name": "B",
+            "sampleRate": {
+              "from": 0.4,
+              "to": 0.7
+            }
+          },
+          {
+            "name": "C",
+            "sampleRate": {
+              "from": 0.7,
+              "to": 1
+            }
+          }
+        ]
+      },
+      {
+        "status": true,
+        "sampleRate": {
+          "from": 0,
+          "to": 1
+        },
+        "experimentLayer": "HP",
+        "id": "ADP_RV_PLP",
+        "nykaaUserVariant": "A",
+        "isSSR": true,
+        "variants": [
+          {
+            "name": "A",
+            "sampleRate": {
+              "from": 0,
+              "to": 0.4
+            }
+          },
+          {
+            "name": "B",
+            "sampleRate": {
+              "from": 0.4,
+              "to": 0.7
+            }
+          },
+          {
+            "name": "C",
+            "sampleRate": {
+              "from": 0.7,
+              "to": 1
+            }
+          }
+        ]
+      },
+      {
+        "status": true,
+        "sampleRate": {
+          "from": 0,
+          "to": 1
+        },
+        "experimentLayer": "HP",
+        "id": "ADP_RV_REORDER",
+        "isSSR": true,
+        "variants": [
+          {
+            "name": "A",
+            "sampleRate": {
+              "from": 0,
+              "to": 0.5
+            }
+          }
+        ]
+      },
+      {
+        "status": true,
+        "sampleRate": {
+          "from": 0,
+          "to": 1
+        },
+        "experimentLayer": "HP",
+        "id": "VRN_REGION",
+        "isSSR": true,
+        "variants": [
+          {
+            "name": "A",
+            "sampleRate": {
+              "from": 0,
+              "to": 0.01
+            }
+          }
+        ]
+      }
+    ];
+    let uuid = "";
+    const request = event.Records[0].cf.request;
+    const reqHeaders = request.headers || {};
+
+    console.log('Req headers -->')
+   
+    console.log(reqHeaders)
+
+    // if((reqHeaders['cloudfront-is-mobile-viewer']
+    //   && reqHeaders['cloudfront-is-mobile-viewer'][0]
+    //   && (reqHeaders['cloudfront-is-mobile-viewer'][0].value == true
+    //     || reqHeaders['cloudfront-is-mobile-viewer'][0].value == 'true'
+    // ))) {
+      const parsedCookies = parseCookies(reqHeaders);
+
+      if(parsedCookies && parsedCookies.bcookie) {
+        uuid = parsedCookies.bcookie;
+      } else {
+        uuid = UUIDv4.generate();
+        parsedCookies.bcookie = uuid;
+      }
+
+      console.log('uuid -->')
+      console.log(uuid);
+
+      for (var i = 0; i < experimentConfig.length; i++) {
+        if(experimentConfig[i].status && isValidSampleRate(experimentConfig[i].sampleRate)) {
+          const expResult = getExperimentEligibility(uuid, experimentConfig[i]);
+          if(expResult.isEligible && expResult.variant) {
+            parsedCookies['EXP_' + expResult.id] = expResult.variant;
+          }
+        }
+      }
+
+      reqHeaders.cookie = [
+        {
+          "key": "Cookie",
+          "value": stringifyCookies(parsedCookies)
+        }
+      ];
+     
+      console.log('Final Req headers -->')
+   
+      console.log(reqHeaders)
+    // }
+
+    callback(null, request);
+  } catch(err) {
+    console.log('Error');
+    console.log(err)
+    callback(null, event.Records[0].cf.request);
+  }
+};
