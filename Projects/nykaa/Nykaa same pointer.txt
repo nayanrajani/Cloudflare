@@ -1,0 +1,83 @@
+Nykaaman to Nykaa + Nykaa fashion
+1. nykaa/man/fashion
+	name- img
+	target- 206.183.108.6
+	note- same in all three, nykaa fashion has "pic" as well
+
+2. nykaa/man/fashion
+	name- support
+	target- 40.80.87.48
+	note- same in all three
+
+3. nykaa/man/fashion
+	Nykaa man name- cloudflare-api
+	Nykaa name    - api, smoke-api
+	target- prod-apig-kong-public-alb-1988483029.ap-south-1.elb.amazonaws.com
+
+4. nykaa/man/fashion
+	Nykaa man name- delivery
+	Nykaa fashion - delivery
+	target- lnk.pepipost.net
+
+5. nykaa/man/fashion
+	Nykaa man name- smoke
+	Nykaa         - www, smoke, nykaad.com(DNS only)
+	target- prod-cd-main-varnish-alb-1336302199.ap-south-1.elb.amazonaws.com
+
+Nykaa Fashion to Nykaaman + Nykaa
+1. nykaa/man/fashion
+	name- img
+	target- 206.183.108.6
+	note- same in all three
+
+2. nykaa/man/fashion
+	name- support
+	target- 40.80.87.48
+	note- same in all three
+
+3. nykaa/man/fashion
+	Nykaa man name- delivery
+	Nykaa fashion - delivery
+	Nykaa         - delivery
+	target- lnk.pepipost.net
+
+4. nykaa/man/fashion
+	Nykaa man name- s1._domainkey
+	Nykaa fashion - s1._domainkey
+	target- s1.domainkey.u511486.wl237.sendgrid.net
+
+5. nykaa/man/fashion
+	Nykaa man name- s2._domainkey
+	Nykaa fashion - s2._domainkey
+	target- s2.domainkey.u511486.wl237.sendgrid.net
+
+Nykaa to Nykaaman + Nykaa Fashion
+1. nykaa/man/fashion
+	name- img
+	target- 206.183.108.6
+	note- same in all three, nykaa fashion has "pic" as well
+
+2. nykaa/man/fashion 	
+	name- support
+	target- 40.80.87.48
+	note- same in all three
+
+3. nykaa/man/fashion
+	Nykaa man name- cloudflare-api
+	Nykaa name    - api, smoke-api
+	target- prod-apig-kong-public-alb-1988483029.ap-south-1.elb.amazonaws.com
+
+4. nykaa/man/fashion
+	Nykaa man name- smoke
+	Nykaa         - www, smoke, nykaad.com(DNS only)
+	target- prod-cd-main-varnish-alb-1336302199.ap-south-1.elb.amazonaws.com
+
+5. nykaa/man/fashion
+	Nykaa man name- s1._domainkey
+	Nykaa fashion - s1._domainkey
+	target- s1.domainkey.u511486.wl237.sendgrid.net
+
+6. nykaa/man/fashion
+	Nykaa man name- s2._domainkey
+	Nykaa fashion - s2._domainkey
+	target- s2.domainkey.u511486.wl237.sendgrid.net

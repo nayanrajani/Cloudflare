@@ -1,0 +1,13 @@
+1. Nykaa has started migrating into the POC Account.
+2. sunday morning 2:30 am around test for original domain, 4:30 they will revert the change.
+3. 10% daily traffic increases.
+4. some change in WAF for Rate limiting, zone lockdown.
+5. page rules have been created by nykaa.
+6. Nykaa changes and created DNS record.
+7. Daily call at evening
+
+Blazeclan:
+1. optimisation should start.
+2. Rahul will start working on atleast one domain.
+3. Converting will make a disturbance in nykaa account, timing -> 2:30 to 3:30 will be fine at mid-night.
+4. 

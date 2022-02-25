@@ -1,0 +1,47 @@
+1. Introduction to cloudflare and zero trust
+2. sassy solution -> Zero trust + Network security
+	- protecting private application
+		- based on security and performance manily based on identity.
+		- VPN has some drawback as well, ZTNA is good solution for that.
+		- protect application from user enterance into the environment.
+
+	- CF can became a single security solution
+	- you can also secure your device + 3rd party user
+	- cf provide multiple security for IDP to access the internal environment for call center
+	- we can use browser isolation
+	- one place to add and update the access policy
+	- private and optimised route with AWS, azure, Internet providers 
+	- SSH via browser
+	- you can create a network segmentation with access. 
+	- each of the vpc can be connected with tunnel
+	- cf don't use VPN
+	- Use gateway to have all the functionality to protect the application at the user level.
+	- about to add dpl + caspy cf has aquire a company for the same, it will be available from 2nd quarter 2022
+	- browser isolation
+		- we are telling browser to display the application to match the delay.
+		- we can control many things.
+		- we can disable many things to Data loss
+		- isolating users from accessing and performing some tasks.
+	- I lost the 3 use case that gaurav told
+	- they will be sharing the use cases and architecture
+	
+	- nykaa(problem)
+		- protect application from user enterance into the environment.
+		- they use VPN + 3rd party application + some other IDP.
+		- they want to restrict the user access from any other device rather from the trusted one's.
+		- netscope they are using currently
+		- they want restriction for prod and pre-prod, and manage the loging activity
+			Answer: you can use different account and CF charge only for the users.
+		- they are using dlp caspy
+		- some of the people from call center, are accessing the private application
+		- this thing to work with Netscope as well
+			- Answer: access has nothing to do with netscope, access and RBI can work side by side with netscope
+
+		- they have 2500-3000(approx.) users
+		
+
+
+
+
+
+
