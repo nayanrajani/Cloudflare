@@ -1,0 +1,19 @@
+1. Nykaad -> for manual work we need to generate the tf file (No Terraform for now)
+	  -> monday or tuesday to be in production
+	  -> same rules as in nykaa.com accept page rule
+	  -> there are only 3 to 4 page rules
+	  -> this is the last domain and need to be configured till friday
+	  -> no rate limit, no firewall rule, no page rules, no DNS record.
+
+2. There are some subdomains will be on-boarded after some time, which are not depended on F5.
+
+3. Nykaa have more internal sub-domains to implement on cloudflare in future.
+
+4. The page rules meeting call with cloudflare will be set-up tomorrow.
+
+5. 20dresses.com and twentydresses.com will not be resolved on the cloudflare due to the name thing, 
+   that's why cloudflare is rejecting the request for 20dresses.com
+
+6. Team will start working on Managed service by End-of the week.
+
+7. DNS rules to be sorted (those rules which are not required we can remove tomorrow 02:00 to 03:00)

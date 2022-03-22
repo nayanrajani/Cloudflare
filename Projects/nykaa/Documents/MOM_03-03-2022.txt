@@ -1,0 +1,7 @@
+MOM for 03-03-2022
+
+1. CNAME Entry was added by Nykaa team on the authoritative DNS by nykaa on clicking the authorization link Nykaa team is getting an error to be consulted with CF Team.
+2. preprod.nykaa.com domain added by nykaa team, and TXT entry is to be added by nykaa Team.
+3. Nykaa Team is going to set-up a call with Blazeclan Team and devops team related Big Bucket Access and CI/CD pipeline.
+4. Blazeclan Team will add the Firewall rules for browser integrity check.
+

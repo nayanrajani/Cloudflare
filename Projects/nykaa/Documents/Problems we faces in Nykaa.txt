@@ -1,0 +1,29 @@
+Problems faced
+
+1. Ip spoofing after Domain onboard before making any DNS entry
+
+2. Cf-device type header to be enabled from Backend(Application-level)
+
+3. Advance certificate configuration to be enabled from CF at the backend 
+
+4. Rearrange the Page rules according to preference (otherwise watch video again)
+
+5. Please do not depend on Universal Certificate (Down time around 30 minutes), better to order the advance.
+
+6. Please delete extra DNS record from the DNS portion (Please consult with the client as well)
+
+7. Redirect of a domain from a 20xyz.com(Not on cloudflare) to twentyxyz.com (Not possible)
+
+8. Please update the WAf from the older to Newer version, update by CF Team (Consult with client for downtime)
+
+9. If a client wants to seperate the pre-prod and prod traffic so it is a better choice to have a seperate domain for pre-prod 
+   and prod.
+
+10. Accept-encoding header will not be added to any page-rules.
+
+11. In the workers if you are adding any URL to match regex expression, it will not accept the * (Wild card) in between the URL.
+
+12. If Client tell you they are getting "dynamic" as a cache-status for any page rule, then just go to particular page rule and 
+    "add a setting" for "chache-level -> Cache Everything" (If not present).
+
+https://developers.cloudflare.com/

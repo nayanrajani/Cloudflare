@@ -1,0 +1,33 @@
+Nykaa.com
+
+	preprod-cloudfront
+	prod-cloudfront
+
+Nykaaman.com
+
+	api
+	cloudflare-api
+
+Nykaafashion.com
+
+	nykaadesign
+	preprod-api
+	preprod-cloudflront
+	prod-nyka-events
+	prod-explore-feedservice
+	www
+
+Kaybeauty
+	
+	do not touch right now
+
+twentydresses
+
+	
+
+
+
+
+
+
+

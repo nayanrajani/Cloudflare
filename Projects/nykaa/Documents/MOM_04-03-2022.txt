@@ -1,0 +1,5 @@
+1. Nykaa Team will share the new country list to update the exisiting firewall rule to block countries.
+2. log retention to be enabled by Blazeclan Team.
+3. Blazeclan tema to reach-out to Cloudflare Team for Updating the WAF UI for twentydresses and aditional configuration changes.
+4. Two new rules were added for browser integrity check and verified by the Nykaa Team.
+5. Along the discussion of separation of preprod and prod zones for nykaa beauty, the additional changes needed were brought to nykaa teams attention. On which Nykaa team mentioned that it would be a huge change and might not be feasible.
