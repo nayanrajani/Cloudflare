@@ -1,0 +1,45 @@
+Problems faced
+
+1. IP spoofing to be done after domain onboard to make sure domain is active on cloudflare. The activity can be done before making any DNS entry in the authoritative DNS (For CNAME)
+
+2. Cf-device type header to be enabled from Backend with the help of CF team (Application-level)
+
+3. Advance certificate configuration to be enabled from CF at the backend
+
+4. Rearrange the Page rules according to preference (otherwise watch video again). Keep the most specific one at the top.
+
+5. Please do not depend on Universal Certificate (Down time around 30 minutes), better to order the advance.
+
+6. Please delete extra DNS record from the DNS portion (Please consult with the client as well)
+
+7. Redirect of a domain from a 20xyz.com(Not on cloudflare) to twentyxyz.com (Not possible). Both the domains need to be onboarded 
+   on Cloudflare for the redirect to work.
+
+8. Please update the WAf from the older to Newer version, update by CF Team (Consult with client for downtime. No application 
+   downtime but WAF will be disabled for few minutes)
+
+9. If a client wants to seperate the pre-prod and prod traffic so it is a better choice to have a seperate domain for pre-prod 
+   and prod.
+
+10. Accept-encoding header cannot be added to custom cache key in page-rules --> 
+    https://developers.cloudflare.com/cache/about/cache-keys/
+
+11. Workers route will not accept the * (Wild card) in between the URL. Wildcard is permitted only at beginning or end of the route.
+
+12. For the cahche status of dynamic with a matching page rule specified for the URL, verify the content type for the request. 
+    In case of the type being dynamic(eg. html), verify with client if they want to cache the html content as well. If agreed, 
+    go to particular page rule and "add a setting" for "chache-level -> Cache Everything" (If not present). This lets cloudflare 
+    cache dynamic content as well. --> https://developers.cloudflare.com/cache/how-to/create-page-rules/
+
+13. Timeout Error 524 - Origin server timeout. Increased the proxy read timeout from default 100 sec to 300 sec. Can do this 
+    with PATCH request to https://api.cloudflare.com/client/v4/zones/<zoneID>/settings/proxy_read_timeout API
+
+14. Requests blocked for https://preprod-api.nykaa.com/credit/statusPull/saveStatus. It was observed that the incoming requests 
+    were blocked due to zone lockdown for preprod-api. 
+
+15. cf.regionCode changes for same IP. For mapping client IP to country, Cloudflare uses Maxmind (3rd party), and the client 
+    IP was shown to be of the region specified on Maxmind.
+
+16. Cipher Enable/Disable with API -> https://api.cloudflare.com/#zone-settings-change-ciphers-setting
+
+https://developers.cloudflare.com/
