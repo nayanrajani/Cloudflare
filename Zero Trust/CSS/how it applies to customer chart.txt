@@ -1,0 +1,46 @@
+ZERO TRUST SECURITY-> NEVER TRUST, ALWAYS VERIFY
+
+1. So you know currently most of the corporate workers are accessing there corporate resources remotely over the Public Internet.
+
+2. so how we can safeguard the resources over a public internet?
+
+3. so, cloudflare concept is, all the data that is being going to corporate application or the device connected to the internet, 
+   it has to go throught the cloudflare network. so from cloudflare end they will analiz, investigate and ensure only actual and 
+   legitmate users can access.
+
+4. Corporates can implement Internet gateway to protect its users and devices against- malware, DNS phising, etc whenever they are 
+   connected to the internet. 
+
+5. and if corporates wants to apply IP policy, so whoever gets connected to there network, to check who is getting connected.
+   to get more granular control, they can use warp client at end-device (Laptop/Mobile devices) to perform HTTP filtering, and also 
+   can be used for end device protection.
+
+6. Browsing activity, employees will be browsing on corporate laptop, so to safeguard this from the device is not being compromised,
+   so we can use browser Isolation.
+   - to basically provide a safeguard to end-user, so that they can search/browse using a safe enviornment.
+   - It will isolate the browsing activites at corporate endpoints, and the browsing processing is done at the cloudflare network.
+   - user is connected from the nearest location of the cloudflare data center.
+
+7. Cloudflare Access can be configured accross all the corporate applications and resources (cloud, saas, etc).
+
+8. it also provides all the visibility and analytics on the dashboard.
+
+Cloudflare offereings for Zero trust:
+
+- from conecting with cloudflare warp client to Internet gateway, browser isolation, secure access. but behind this there are 
+  many more things like intelligent routing, global edge network, world's fastest resolver, single-pass inspection, single pane 
+  management, programmable interface, MDM-IDP-EPP integration, Internet radar, visinary innovation.
+
+ZERO TRUST SOLUTIONS
+
+What we see in the field?
+
+
+
+
+
+
+
+
+
+
