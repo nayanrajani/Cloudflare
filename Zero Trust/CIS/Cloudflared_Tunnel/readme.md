@@ -64,6 +64,27 @@ C:\Users\<%UserProfile%>\Development\Cloudflare Part\Cloudflare\Zero Trust\CIS\C
 2022-02-07T07:45:48Z INF Connection 4a5937d8-9ff9-47a7-be17-95cffa1da103 registered connIndex=3 location=BOM
 
 
-cloudflared tunnel list
-cloudflared tunnel route dns GreencoinLocal private.greencoin.cf
-cloudflared tunnel --config C:\Users\nayan.rajani\.cloudflared\config.yml --origin-ca-pool C:\Users\nayan.rajani\.cloudflared\cert.pem run GreencoinLocal
+- cloudflared update
+- cloudflared tunnel login
+- cloudflared tunnel create <NAME>
+    - Create ingress rule in the config file of .cloudflared in your <%UserProfile%>
+
+        tunnel: <Tunnel_UUID>
+        credentials-file: C:/Users/<%UserProfile%>/.cloudflared/<Tunnel_UUID>.json
+
+        ingress: 
+        - hostname: private.greencoin.cf
+        service: http://localhost:8887
+        - service: http_status:404
+
+- cloudflared tunnel list
+- cloudflared tunnel route dns GreencoinLocal private.greencoin.cf
+
+- cloudflared tunnel --config C:\Users\<%UserProfile%>\.cloudflared\config.yml --origin-ca-pool C:\Users\<%UserProfile%>\.cloudflared\cert.pem run GreencoinLocal
+
+OR 
+
+- cloudflared tunnel run <Tunnel_Name>
+
+
+
