@@ -80,7 +80,7 @@ C:\Users\<%UserProfile%>\Development\Cloudflare Part\Cloudflare\Zero Trust\CIS\C
 - cloudflared tunnel list
 - cloudflared tunnel route dns GreencoinLocal private.greencoin.cf
 
-- cloudflared tunnel --config C:\Users\<%UserProfile%>\.cloudflared\config.yml --origin-ca-pool C:\Users\<%UserProfile%>\.cloudflared\cert.pem run GreencoinLocal
+- cloudflared tunnel --config C:\Users\nayan.rajani\.cloudflared\config.yml --origin-ca-pool C:\Users\nayan.rajani\.cloudflared\cert.pem run GreencoinLocal
 #Tunnel as a service
 OR 
 
