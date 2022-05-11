@@ -1,0 +1,145 @@
+Q&A - DAY-1
+All questions (8)My questions (1)
+VJ
+Vikram Jindal
+08:50 AM
+SSL certificate process would be between client and cloudflare, cloudflare and origin server ?
+Collapse all (1) 
+JB
+jamal Boutkabout
+08:51 AM
+Client and Cloudflare we can however also pass the cert fingerprint/serial number to origin if you need to do more validation
+VJ
+Vikram Jindal
+08:51 AM
+Please help me with a document that clearly expalin the certificate process
+Collapse all (2) 
+JB
+jamal Boutkabout
+08:52 AM
+https://developers.cloudflare.com/cloudflare-one/identity/devices/mutual-tls-authentication/
+FT
+Frank Taylor
+09:03 AM
+On the edge-to-origin-server side, there is also another certificate process that is outlined here: https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/install-and-setup/tunnel-guide/#2-authenticate-cloudflared
+NV
+Narasimhan V S
+08:51 AM
+For certification based authentication with Server, is it required to install Cloudflare certificate on server ?
+Collapse all (1) 
+JB
+jamal Boutkabout
+08:52 AM
+no mTLS is validate at the edge
+avatar
+Anonymous Attendee
+08:52 AM
+Does cloudflare access support thick client application using web browser?
+Collapse all (1) 
+JB
+jamal Boutkabout
+08:52 AM
+we can render SSH VNC on the browser today
+VJ
+Vikram Jindal
+08:52 AM
+What is JWT auth ?
+Collapse all (2) 
+JB
+jamal Boutkabout
+08:53 AM
+Jason Web Token
+JB
+jamal Boutkabout
+08:53 AM
+Json Web Token
+avatar
+Anonymous Attendee
+08:55 AM
+We will be getting the PPt as well, which was earlier shown by Frank?
+Collapse all (1) 
+FT
+Frank Taylor
+08:56 AM
+Yes :)
+
+
+You are viewing jamal Boutkabout's screen
+Frank Taylor
+avatar
+Anonymous Attendee
+09:10 AM
+does SAML group supported on all IdP integration?
+Collapse all (1) 
+FT
+Frank Taylor
+09:23 AM
+Yes
+VJ
+Vikram Jindal
+09:20 AM
+How we can get full access on Cloudlfare Dashboard ?
+Collapse all (1) 
+FT
+Frank Taylor
+09:23 AM
+You personally? Or how does a system admin get full access?
+Anonymous Attendee
+09:28 AM
+What would be a typical implementation look like if customer has 60-70 applications hosted in data centre? Do we need to create cloudflared tunnel for each application?
+Collapse all (1) 
+FT
+Frank Taylor
+09:28 AM
+No. This will be covered tomorrow. we have customers running thousands of tunnels
+Anonymous Attendee
+09:33 AM
+for exposing internal web applications, does CF Zero Trust provide layer 7 WAF?
+Collapse all (1) 
+FT
+Frank Taylor
+09:33 AM
+Yes!
+Q&A - DAY-2
+avatar
+Anonymous Attendee
+08:53 AM
+can we add additional apps to the tunnel created via the dashboard?
+Collapse all (2) 
+FT
+Frank Taylor
+08:55 AM
+Only one application can be attached to a tunnel
+FT
+Frank Taylor
+08:56 AM
+But that “application” can be a TCP load balancer, for example; it doesnt have to be a specific protocol in that sense
+Anonymous Attendee
+08:56 AM
+How many tunnels I can run at a single time?
+and how many private applications i can run from a single device?
+Collapse all (1) 
+FT
+Frank Taylor
+09:25 AM
+This is one answer to this question - use Private Network to expose the entire machine
+avatar
+Anonymous Attendee
+09:06 AM
+Do we need additional VM in use case 2 if different applications are on different servers?
+This question has been answered live
+DS
+David Stewen
+09:22 AM
+There are switches that can be used to ignore self signed certificate trust issues. So the connection from the cloudflared to the origin server will ignore certificate warnings.
+Collapse all (1) 
+FT
+Frank Taylor
+09:28 AM
+# config.yaml
+ingress:
+  - hostname: www.example.com
+    service: https://localhost:4730
+    originRequest:
+      noTLSVerify: true
+
