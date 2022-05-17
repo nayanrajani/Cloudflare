@@ -143,3 +143,58 @@ ingress:
     originRequest:
       noTLSVerify: true
 
+Q&A - Day-3
+All questions (1)My questions (0)
+avatar
+Anonymous Attendee
+08:42 AM
+what do you mean by Draw commands
+Collapse all (1) 
+JB
+Jamal Boutkabout
+08:45 AM
+https://blog.cloudflare.com/cloudflare-and-remote-browser-isolation/
+
+avatar
+Anonymous Attendee
+08:54 AM
+Content Category and Security Category are both in DNS and HTTP policy. May I know what the difference between them is? And if we want to block, for example, socialmedia apps, do we need to create rules for both DNS and HTTP policy?
+Collapse all (1) 
+FT
+Frank Taylor
+08:56 AM
+Gateway has two modes - HTTP mode and DNS mode. If you are using it in HTTP mode (“Gateway with WARP”) then you need to use HTTP policies. Otherwise, you need to create DNS policies
+
+avatar
+Anonymous Attendee
+09:07 AM
+How will Alerts be sent in case a rule is hot and Block action takes place. I know the logs, but how about alerts ?
+Collapse all (1) 
+FT
+Frank Taylor
+09:08 AM
+We don’t support that kind of customized alerting in the dashboard today. We offer the ability for customers to export logs to their SEIM in real-time, and alerts can be configured there.
+avatar
+Anonymous Attendee
+09:10 AM
+what is the idea behind not supporting alerting ? For a product like ZT, the customer should ideally be notified in case of an event. A security product MSP should be blocking and notifing about the events. Are there any future plans of alert integration ?
+Collapse all (2) 
+FT
+Frank Taylor
+09:11 AM
+Its on the roadmap yes
+FT
+Frank Taylor
+09:12 AM
+It’s a very challenging system to implement
+
+avatar
+Anonymous Attendee
+09:20 AM
+Content Category and Security Category are both in DNS and HTTP policy. May I know what the difference between them is? And if we want to block, for example, socialmedia apps, do we need to create rules for both DNS and HTTP policy?
+My understanding is that for DNS, you block the access only based on DNS resolution request, e.g. netflix.com, without ability to define the detail action pertaining to the block policy. With HTTP policy, you're able to define more detailed attributes related to blocking, e.g allow access of netflix.com, but block downloading files from netflix.com. You can define either DNS OR HTTP, depending on the intention.
+Collapse all (1) 
+FT
+Frank Taylor
+09:25 AM
+Thats correct. DNS is connectionless, and independent of application-layer protocols
