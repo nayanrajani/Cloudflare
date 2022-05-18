@@ -198,3 +198,47 @@ FT
 Frank Taylor
 09:25 AM
 Thats correct. DNS is connectionless, and independent of application-layer protocols
+
+Q&A - Day-4
+All questions (3)My questions (0)
+avatar
+Anonymous Attendee
+08:44 AM
+any possibility for the zero trust dashboard domain to change to something like dash.zerotrust.cloudflare.com instead of dash.teams.cloudflare.com, to match the recent changes of the branding of the zero trust services?
+Collapse all (1) 
+JB
+Jamal Boutkabout
+08:47 AM
+Thanks for the feedback - something we are planning to address
+avatar
+Anonymous Attendee
+08:50 AM
+Does App Launcher need specific authentication settings? I am using OTP for normal authentication, but cannot access the App Launcher.
+Collapse all (2) 
+FT
+Frank Taylor
+08:52 AM
+No it doesn’t. Have you enabled the App Launcher under Settings —> Authentication —> App Launcher?
+JB
+Jamal Boutkabout
+09:00 AM
+If you want to display the apps in the app launcher make sure you configure IdP + policy.
+avatar
+Anonymous Attendee
+08:55 AM
+while we are testing the logpush to a logcollector, the "action" field (allow/block) is not included in the logpush whether it is DNS or Network log. is this an expected behavior?
+Collapse all (1) 
+FT
+Frank Taylor
+08:56 AM
+Gateway Network should display that field, but DNS does not
+
+avatar
+Anonymous Attendee
+09:25 AM
+cloudflared update and warp update fails while connected to WARP. How can we resolve this? In some cases, the users are not allowed to turn off the WARP client.
+Collapse all (1) 
+FT
+Frank Taylor
+09:26 AM
+This is a known bug. We are working on it :/
