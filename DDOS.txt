@@ -1,0 +1,7 @@
+If you met with a DDOS- Cloudflare DDOS threshold is 2000 request per minute
+
+1. try to see the request per minute (rpm).
+
+2. change the rate limit (threshold) settings for every URL, to the better range that you have seen during DDOS Attack.
+
+3. Change the setting for DDOS to default if you have changed, otherwise it is okay
