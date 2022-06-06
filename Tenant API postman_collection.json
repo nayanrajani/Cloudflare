@@ -1,0 +1,1084 @@
+{
+	"info": {
+		"_postman_id": "20edd975-9325-4654-9137-2d4faa2a0756",
+		"name": "Tenant Tests",
+		"description": "testing of new partner apis in staging",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "extra calls",
+			"item": [
+				{
+					"name": "Create ENT Zone Subscription",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5d2421b7-6d12-42d6-a669-9333b12c05ba",
+								"exec": [
+									"_ = require(\"lodash\");",
+									"",
+									"pm.test(\"response is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Key",
+								"value": "{{x-auth-key-user}}"
+							},
+							{
+								"key": "X-Auth-Email",
+								"value": "{{x-auth-email-user}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"rate_plan\": {\"id\": \"PARTNERS_BIZ\"},\n\t\"component_values\": [\n            {\n                \"name\": \"dedicated_certificates_custom\",\n                \"value\": 1\n            }]\n}"
+						},
+						"url": {
+							"raw": "{{api}}/zones/{{zone-id}}/subscription",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"zones",
+								"{{zone-id}}",
+								"subscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create PRO Zone Subscription",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5d2421b7-6d12-42d6-a669-9333b12c05ba",
+								"exec": [
+									"_ = require(\"lodash\");",
+									"",
+									"pm.test(\"response is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Key",
+								"value": "{{x-auth-key-user}}"
+							},
+							{
+								"key": "X-Auth-Email",
+								"value": "{{x-auth-email-user}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"rate_plan\": {\"id\": \"PARTNERS_PRO\"},\n\t\"component_values\": [\n            {\n                \"name\": \"dedicated_certificates_custom\",\n                \"value\": 1\n            }]\n}"
+						},
+						"url": {
+							"raw": "{{api}}/zones/{{zone-id}}/subscription",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"zones",
+								"{{zone-id}}",
+								"subscription"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit LB Sub",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bca93c5c-758b-4502-92a6-53e195d1d1ad",
+								"exec": [
+									"_ = require(\"lodash\");",
+									"",
+									"pm.test(\"response is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-auth-email",
+								"value": "{{x-auth-email-user}}"
+							},
+							{
+								"key": "x-auth-key",
+								"value": "{{x-auth-key-user}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"rate_plan\": {\"id\": \"PARTNERS_LOAD_BALANCING\"},\n  \"component_values\": [\n                {\n                    \"name\": \"load_balancing_origins\",\n                    \"value\": 6\n                },\n                {\n                    \"name\": \"load_balancers\",\n                    \"value\": 20\n                },\n                {\n                    \"name\": \"load_balancing_base\",\n                    \"value\": 1\n                },\n                {\n                    \"name\": \"load_balancing_geo_routing\",\n                    \"value\": 1\n                },\n                {\n                    \"name\": \"load_balancing_pools\",\n                    \"value\": 5\n                },\n                {\n                    \"name\": \"load_balancing_probe_regions\",\n                    \"value\": 1\n                },\n                {\n                    \"name\": \"load_balancing_dns_queries\",\n                    \"value\": 0\n                },\n                {\n                    \"name\": \"load_balancing_monitor_interval\",\n                    \"value\": 60\n                },\n                {\n                    \"name\": \"load_balancing_monitors\",\n                    \"value\": 5\n                }\n            ]\n}"
+						},
+						"url": {
+							"raw": "{{api}}/accounts/{{user-account-id}}/subscriptions/894dd92947de402999b8dbd78b7a1506",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"accounts",
+								"{{user-account-id}}",
+								"subscriptions",
+								"894dd92947de402999b8dbd78b7a1506"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create RL Sub",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7b01014b-a0d5-4fb4-8f65-b331b1b6c0ea",
+								"exec": [
+									"_ = require(\"lodash\");",
+									"",
+									"pm.test(\"response is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-auth-email",
+								"value": "{{x-auth-email}}"
+							},
+							{
+								"key": "x-auth-key",
+								"value": "{{x-auth-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"rate_plan\": {\"id\": \"PARTNERS_RATE_LIMITING\"}\n}"
+						},
+						"url": {
+							"raw": "{{api}}/accounts/{{user-account-id}}/subscriptions",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"accounts",
+								"{{user-account-id}}",
+								"subscriptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Workers ENT",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f21058f3-cac6-42fb-ba27-a7d7593c2c93",
+								"exec": [
+									"_ = require(\"lodash\");",
+									"",
+									"pm.test(\"response is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"postman.setEnvironmentVariable(\"sub_id\", jsonData.result.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-auth-email",
+								"value": "{{x-auth-email}}"
+							},
+							{
+								"key": "x-auth-key",
+								"value": "{{x-auth-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"rate_plan\": {\"id\": \"PARTNERS_WORKERS_ENT\"}\n}"
+						},
+						"url": {
+							"raw": "{{api}}/accounts/{{user-account-id}}/subscriptions",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"accounts",
+								"{{user-account-id}}",
+								"subscriptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT user sub (workers)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"_ = require(\"lodash\");",
+									"",
+									"pm.test(\"response is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Key",
+								"value": "{{x-auth-key-user}}"
+							},
+							{
+								"key": "X-Auth-Email",
+								"value": "{{x-auth-email-user}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"rate_plan\": {\"id\": \"IBM_WORKERS_ENT\"},\n  \"component_values\":[\n  \t\t{\n            \"name\": \"workers_kv_storage\",\n            \"value\": 2\n        }\n  \t]\n}"
+						},
+						"url": {
+							"raw": "{{api}}/accounts/{{user-account-id}}/subscriptions/{{sub_id}}",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"accounts",
+								"{{user-account-id}}",
+								"subscriptions",
+								"{{sub_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Spectrum",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1426e468-f8e5-49f8-b59f-6492ebe9b7a2",
+								"exec": [
+									"_ = require(\"lodash\");",
+									"",
+									"pm.test(\"response is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"postman.setEnvironmentVariable(\"sub_id\", jsonData.result.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-auth-email",
+								"value": "{{x-auth-email}}"
+							},
+							{
+								"key": "x-auth-key",
+								"value": "{{x-auth-key}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"rate_plan\": {\"id\": \"PARTNERS_SPECTRUM\"}\n}"
+						},
+						"url": {
+							"raw": "{{api}}/accounts/{{user-account-id}}/subscriptions",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"accounts",
+								"{{user-account-id}}",
+								"subscriptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE spectrum",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "169068ff-754a-4198-a7f1-55d947c85ba3",
+								"exec": [
+									"_ = require(\"lodash\");",
+									"",
+									"pm.test(\"response is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-Auth-Key",
+								"value": "{{x-auth-key-user}}"
+							},
+							{
+								"key": "X-Auth-Email",
+								"value": "{{x-auth-email-user}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"rate_plan\": {\"id\": \"IBM_BIZ\"}}"
+						},
+						"url": {
+							"raw": "{{api}}/accounts/{{user-account-id}}/subscriptions/{{sub_id}}",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"accounts",
+								"{{user-account-id}}",
+								"subscriptions",
+								"{{sub_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "create account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "11b9da32-d4db-4b9d-bd89-b483209a1940",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"user-account-id\",jsonData.result.id);",
+							"",
+							"_ = require(\"lodash\");",
+							"",
+							"pm.test(\"response is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "fbcef4c4-c79d-46f6-a509-a215ca831e2d",
+						"exec": [
+							"random_var = Math.floor((Math.random() * 100000) + 1)",
+							"",
+							"postman.setEnvironmentVariable(\"user-account-name\",\"tenanttest_\" + random_var);",
+							"postman.setEnvironmentVariable(\"x-auth-email-user\",\"tenanttest_\" +random_var +\"@api.cloudflare.com\");",
+							"postman.setEnvironmentVariable(\"zone-name\",\"tenanttest_\" + random_var + \".cfapi.net\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-auth-email",
+						"value": "{{x-auth-email}}"
+					},
+					{
+						"key": "x-auth-key",
+						"value": "{{x-auth-key}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{user-account-name}}\"\n}"
+				},
+				"url": {
+					"raw": "{{api}}/accounts",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"accounts"
+					]
+				},
+				"description": "create a new account"
+			},
+			"response": []
+		},
+		{
+			"name": "create user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d453df15-0b2e-4ad9-ad31-d60113eab976",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"x-auth-key-user\",jsonData.result.api_key);",
+							"postman.setEnvironmentVariable(\"user-id\",jsonData.result.id);",
+							"",
+							"_ = require(\"lodash\");",
+							"",
+							"pm.test(\"response is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-auth-email",
+						"value": "{{x-auth-email}}"
+					},
+					{
+						"key": "x-auth-key",
+						"value": "{{x-auth-key}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"{{x-auth-email-user}}\"\n}"
+				},
+				"url": {
+					"raw": "{{api}}/users",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add member to account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"_ = require(\"lodash\");",
+							"",
+							"pm.test(\"response is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-auth-email",
+						"value": "{{x-auth-email}}"
+					},
+					{
+						"key": "x-auth-key",
+						"value": "{{x-auth-key}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"{{x-auth-email-user}}\",\n    \"roles\": [\"{{user_role}}\"],\n    \"status\": \"accepted\"\n}"
+				},
+				"url": {
+					"raw": "{{api}}/accounts/{{user-account-id}}/members",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"accounts",
+						"{{user-account-id}}",
+						"members"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Zone",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e917a972-a044-4e72-b179-8109c1d84ecc",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"zone-id\",jsonData.result.id);",
+							"",
+							"_ = require(\"lodash\");",
+							"",
+							"pm.test(\"response is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "x-auth-email",
+						"value": "{{x-auth-email}}"
+					},
+					{
+						"key": "x-auth-key",
+						"value": "{{x-auth-key}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"{{zone-name}}\",\n    \"account\": {\n        \"id\": \"{{user-account-id}}\"\n    }\n}"
+				},
+				"url": {
+					"raw": "{{api}}/zones",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"zones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create BIZ Zone Subscription",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5d2421b7-6d12-42d6-a669-9333b12c05ba",
+						"exec": [
+							"_ = require(\"lodash\");",
+							"",
+							"pm.test(\"response is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Auth-Key",
+						"value": "{{x-auth-key}}"
+					},
+					{
+						"key": "X-Auth-Email",
+						"value": "{{x-auth-email}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"rate_plan\": {\"id\": \"PARTNERS_BIZ\"},\n\t\"component_values\": [\n            {\n                \"name\": \"dedicated_certificates_custom\",\n                \"value\": 1\n            }]\n}"
+				},
+				"url": {
+					"raw": "{{api}}/zones/{{zone-id}}/subscription",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"zones",
+						"{{zone-id}}",
+						"subscription"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify Biz Zone Sub",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "26977e72-e9a6-4080-acb3-415ba60f3dda",
+						"exec": [
+							"_ = require(\"lodash\");",
+							"",
+							"pm.test(\"response is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Auth-Key",
+						"value": "{{x-auth-key}}"
+					},
+					{
+						"key": "X-Auth-Email",
+						"value": "{{x-auth-email}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"rate_plan\": {\"id\": \"PARTNERS_BIZ\"},\n\t\"component_values\": [\n            {\n                \"name\": \"dedicated_certificates_custom\",\n                \"value\": 5\n            },\n            {\n                \"name\": \"dedicated_certificates\",\n            \t\"value\": 1\n            }]\n}"
+				},
+				"url": {
+					"raw": "{{api}}/zones/{{zone-id}}/subscription",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"zones",
+						"{{zone-id}}",
+						"subscription"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create LB Sub",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "68e80088-8f4c-47dd-bc6a-be29705e4771",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"lb-sub-id\",jsonData.result.id);",
+							"",
+							"_ = require(\"lodash\");",
+							"",
+							"pm.test(\"response is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-auth-email",
+						"value": "{{x-auth-email}}"
+					},
+					{
+						"key": "x-auth-key",
+						"value": "{{x-auth-key}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"rate_plan\": {\"id\": \"PARTNERS_LOAD_BALANCING\"},\n  \"component_values\": [\n                {\n                    \"name\": \"load_balancing_origins\",\n                    \"value\": 6\n                },\n                {\n                    \"name\": \"load_balancers\",\n                    \"value\": 20\n                },\n                {\n                    \"name\": \"load_balancing_base\",\n                    \"value\": 1\n                },\n                {\n                    \"name\": \"load_balancing_geo_routing\",\n                    \"value\": 1\n                },\n                {\n                    \"name\": \"load_balancing_pools\",\n                    \"value\": 6\n                },\n                {\n                    \"name\": \"load_balancing_probe_regions\",\n                    \"value\": 1\n                },\n                {\n                    \"name\": \"load_balancing_dns_queries\",\n                    \"value\": 0\n                },\n                {\n                    \"name\": \"load_balancing_monitor_interval\",\n                    \"value\": 60\n                },\n                {\n                    \"name\": \"load_balancing_monitors\",\n                    \"value\": 5\n                }\n            ]\n}"
+				},
+				"url": {
+					"raw": "{{api}}/accounts/{{user-account-id}}/subscriptions",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"accounts",
+						"{{user-account-id}}",
+						"subscriptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete lb sub",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d8efd016-8f3e-4137-b911-e3882852c096",
+						"exec": [
+							"_ = require(\"lodash\");",
+							"",
+							"pm.test(\"response is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Auth-Key",
+						"value": "{{x-auth-key}}"
+					},
+					{
+						"key": "X-Auth-Email",
+						"value": "{{x-auth-email}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api}}/accounts/{{user-account-id}}/subscriptions/{{lb-sub-id}}",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"accounts",
+						"{{user-account-id}}",
+						"subscriptions",
+						"{{lb-sub-id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete zone sub",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "337a4b74-e0e0-4c62-961a-47bfb2cd374b",
+						"exec": [
+							"_ = require(\"lodash\");",
+							"",
+							"pm.test(\"response is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Auth-Key",
+						"value": "{{x-auth-key}}"
+					},
+					{
+						"key": "X-Auth-Email",
+						"value": "{{x-auth-email}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api}}/zones/{{zone-id}}/subscription",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"zones",
+						"{{zone-id}}",
+						"subscription"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELTE zone",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "468ac80e-70cf-4915-b5f1-56f70142df20",
+						"exec": [
+							"_ = require(\"lodash\");",
+							"",
+							"pm.test(\"response is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "x-auth-email",
+						"value": "{{x-auth-email}}"
+					},
+					{
+						"key": "x-auth-key",
+						"value": "{{x-auth-key}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api}}/zones/{{zone-id}}",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"zones",
+						"{{zone-id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3d6a56c5-7645-491d-a4e1-1e09a09b2e5d",
+						"exec": [
+							"_ = require(\"lodash\");",
+							"",
+							"pm.test(\"response is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-auth-email",
+						"value": "{{x-auth-email}}"
+					},
+					{
+						"key": "x-auth-key",
+						"value": "{{x-auth-key}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api}}/users/{{user-id}}",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"users",
+						"{{user-id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "94401ee6-5cdf-4cfa-b6d3-c3c110c2ad99",
+						"exec": [
+							"_ = require(\"lodash\");",
+							"",
+							"pm.test(\"response is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "X-Auth-Key",
+						"value": "{{x-auth-key}}"
+					},
+					{
+						"key": "X-Auth-Email",
+						"value": "{{x-auth-email}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api}}/accounts/{{user-account-id}}",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"accounts",
+						"{{user-account-id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
