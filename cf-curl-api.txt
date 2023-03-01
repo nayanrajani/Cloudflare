@@ -1,0 +1,4 @@
+curl -s \
+    -H "X-Auth-Email: nayan.rajani@blazeclan.com" \
+    -H "X-Auth-Key: " \
+    "https://api.cloudflare.com/client/v4/zones/44ad037417b384f796f7c53be12ee845/logs/received?start=2022-02-25T10:45:00Z&end=2022-02-25T11:45:00Z&count=1&fields=$(curl -s -H "X-Auth-Email: nayan.rajani@blazeclan.com" -H "X-Auth-Key: " "https://api.cloudflare.com/client/v4/zones/44ad037417b384f796f7c53be12ee845/logs/received/fields" | jq '. | to_entries[] | .key' -r | paste -sd "," -)"

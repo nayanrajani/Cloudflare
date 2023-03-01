@@ -1,0 +1,6 @@
+Email: nayan.rajani@blazeclan.com
+Password: 
+
+GET-Accounts
+curl -X GET https://api.cloudflare.com/client/v4/accounts -H 'Content-Type: application/json' -H 'x-auth-email: nayan.rajani@blazeclan.com' -H 'x-auth-key: '
+
